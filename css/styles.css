@@ -7,7 +7,7 @@
  * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
  *
 */
-
+@import url(add-ons.css);
 
 /* ---- Base Rules ---- */
 body {
@@ -67,30 +67,26 @@ section {
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
-    text-align: right;
+    text-align: center;
 }
 
 .navbar__menu li {
     display: inline-block;
 }
 
-.navbar__menu .menu__link {
+.navbar__menu {
     display: block;
-    padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
 }
 
-.navbar__menu .menu__link:hover {
-    background: #333;
+.navbar__menu {
     color: #fff;
     transition: ease 0.3s all;
 }
 
 /* Header Styles */
 .page__header {
-    background: rgb(41, 41, 41);
     position: fixed;
     top: 0;
     width: 100%;

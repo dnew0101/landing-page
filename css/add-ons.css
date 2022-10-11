@@ -1,0 +1,88 @@
+/*There was a plethora of code inside the original styles.css file
+so, to keep better track of my code, I added a second stylesheet*/
+#navbar__list {
+    background-color: rgb(51, 51, 51);
+    display: flex;
+    flex-direction: row;
+    line-height: 50px;
+    justify-content: space-evenly;
+}
+#navbar__list li{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.navbar__menu li a{
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.navbar__menu li:hover {
+    animation: subtleChanges 1s ease-in forwards;
+}
+@keyframes subtleChanges {
+    0% {
+        background-color: #333;
+    }
+    100% {
+        background-color: rgb(94, 94, 94);
+    }
+}
+
+/*I thought doing a navbar icon, similar to the one on MDN Web 
+ Docs, would be a cool aesthetic, as well as a better UX for mobile
+ users*/
+.button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 30px;
+}
+.button .line {
+    background-color: rgb(255, 255, 255);
+    height: 2px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    .button {
+        display: flex;
+    }
+    .navbar__menu {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: rgba(51, 51, 51, 0.2);
+    }
+    #navbar__list {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+    }
+    #navbar__list li {
+        text-align: center;
+        background-color: rgba(51, 51, 51, 0.6);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    #navbar__list.active {
+        display: flex;
+        background-color: rgba(51, 51, 51, 0.6);
+    }
+    .navbar__menu li:hover {
+        animation: subtleChanges 1s ease-in forwards;
+    }
+    @keyframes subtleChanges {
+        0% {
+            background-color: rgba(51, 51, 51, 0.6);
+        }
+        100% {
+            background-color: rgba(85, 85, 85, 0.8);
+        }
+    }
+}
