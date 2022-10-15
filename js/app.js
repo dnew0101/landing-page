@@ -6,13 +6,11 @@ for (let i = 1; i <= nodeList.length; i++) {
     //I used event.preventDefault() to avoid the screen jumping back to the top when a li is clicked
 } //I could've also used .appendChild() in this loop, but felt that less code is better, simpler code
 
-
-let temp = 0; //This is a globally accessible variable that determines which section and button are active
-
 //The next lines of code use "Event Delegation" to sense a click event and then
 // auto scroll to the desired section of the DOM
 let navbarMenu = navbarList.children;
 function scrollOnClick(event) {
+    let temp;
     if (event.target.nodeName = 'li') {
         for (let i = 0; i < navbarMenu.length; i++) { //This for loop filters out which index of the navbar was clicked
             if (event.target.innerText == navbarMenu[i].innerText) {
@@ -21,7 +19,6 @@ function scrollOnClick(event) {
             }
         }
         //The temp variable is used to find the navbar's corresponding node
-        myActiveClass();
         nodeList[temp].scrollIntoView({
             behavior: "smooth",
             block: "start",
@@ -34,18 +31,6 @@ function scrollOnClick(event) {
 //Scroll upon selection
 navbarList.addEventListener('click', scrollOnClick);
 
-
-
-//Function for active status for article sections
-function myActiveClass() {
-    let currentActiveClass = document.querySelector(".your-active-class");
-    let newActiveClass = nodeList[temp];
-    if (newActiveClass != currentActiveClass) {
-        currentActiveClass.classList.remove("your-active-class");
-        newActiveClass.classList.add("your-active-class");
-        //.parentNode because nodeList is a list of the landing containers
-    }
-}
 
 //Active status for toggling button and section cards
 const button = document.querySelector(".button");
@@ -69,15 +54,25 @@ function inViewport (section) {
     return (rect?.top >= (-1 * rectHalf) && rect?.bottom <= (window.innerHeight + rectHalf));
     //when the DOMrect is halfway scrolled past, it is no longer active
 }
+let counter = 0; //section in viewport correlated to navbar display
 function update() {
-    for (let i = 1; i <= nodeList.length; i++) {
+    for (let i = 0; i < nodeList.length; i++) {
         let section = nodeList[i];
         if (inViewport(section)) {
             if (!section.classList.contains("your-active-class")) {
+                counter = i;
                 section.classList.add("your-active-class");
             }
         } else {
             section?.classList.remove("your-active-class");
+        }
+    }
+    if (!navbarMenu[counter].classList.contains("display")) {
+        navbarMenu[counter].classList.add("display");
+        for (let j = 0; j < navbarMenu.length; j++) {
+            if(navbarMenu[j] != navbarMenu[counter]) {
+                navbarMenu[j].classList.remove("display");
+            }
         }
     }
 }

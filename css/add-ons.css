@@ -18,6 +18,10 @@ so, to keep better track of my code, I added a second stylesheet*/
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
+.navbar__menu li.display {
+    background-color: rgb(26, 26, 26);
+}
+
 .navbar__menu li:hover {
     animation: subtleChanges 1s ease-in forwards;
 }
@@ -72,17 +76,17 @@ so, to keep better track of my code, I added a second stylesheet*/
     }
     #navbar__list.active {
         display: flex;
-        background-color: rgba(51, 51, 51, 0.6);
+        background-color: rgba(51, 51, 51, 0.8);
     }
     .navbar__menu li:hover {
         animation: subtleChanges 0.5s ease-in forwards;
     }
     @keyframes subtleChanges {
         0% {
-            background-color: rgba(51, 51, 51, 0.6);
+            background-color: rgba(51, 51, 51, 0.8);
         }
         100% {
-            background-color: rgba(85, 85, 85, 0.8);
+            background-color: rgba(85, 85, 85, 1);
         }
     }
 }
