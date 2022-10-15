@@ -1,5 +1,5 @@
 //The following code is a dynamic way to recruit the number of navbar cards required to navigate the page
-const nodeList = document.querySelectorAll(".landing__container");
+const nodeList = document.querySelectorAll("section");
 const navbarList = document.querySelector("#navbar__list");
 for (let i = 1; i <= nodeList.length; i++) {
     navbarList.innerHTML += '<li><a href = "#" onclick = "event.preventDefault()">Section '+ i + '</a></li>';
@@ -42,7 +42,7 @@ function myActiveClass() {
     let newActiveClass = nodeList[temp];
     if (newActiveClass != currentActiveClass) {
         currentActiveClass.classList.remove("your-active-class");
-        newActiveClass.parentNode.classList.add("your-active-class");
+        newActiveClass.classList.add("your-active-class");
         //.parentNode because nodeList is a list of the landing containers
     }
 }
@@ -62,21 +62,24 @@ navbarList.addEventListener("click", toggleButton);
 
 //Active status when mouse hovers over specific landing container
 //Watched tutorial for .getBoundingClientRect() here: https://www.youtube.com/watch?v=MKpZadkuT-0
-
+//Also found some info on optional chaining at: https://www.freecodecamp.org/news/how-the-question-mark-works-in-javascript/
 function inViewport (section) {
-    const bounding = section.getBoundingClientRect();
-    return (bounding.top >= 0 && bounding.bottom <= document.documentElement.clientHeight); //A section is in the viewport when the DOMRect top is =< 0, and when the bottom is less than or equal to a user's viewport height
+    const rect = section?.getBoundingClientRect();
+    const rectHalf = (rect?.height/2)
+    return (rect?.top >= (-1 * rectHalf) && rect?.bottom <= (window.innerHeight + rectHalf));
+    //when the DOMrect is halfway scrolled past, it is no longer active
 }
 function update() {
     for (let i = 1; i <= nodeList.length; i++) {
-        let section = nodeList[i].parentNode;
+        let section = nodeList[i];
         if (inViewport(section)) {
             if (!section.classList.contains("your-active-class")) {
                 section.classList.add("your-active-class");
             }
         } else {
-            section.classList.remove("your-active-class");
+            section?.classList.remove("your-active-class");
         }
     }
 }
 document.addEventListener("scroll", update);
+update();
