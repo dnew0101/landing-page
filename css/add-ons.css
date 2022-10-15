@@ -75,7 +75,7 @@ so, to keep better track of my code, I added a second stylesheet*/
         background-color: rgba(51, 51, 51, 0.6);
     }
     .navbar__menu li:hover {
-        animation: subtleChanges 1s ease-in forwards;
+        animation: subtleChanges 0.5s ease-in forwards;
     }
     @keyframes subtleChanges {
         0% {

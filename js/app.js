@@ -29,31 +29,55 @@ function scrollOnClick(event) {
         })
     }
 }
+
+
+//Scroll upon selection
 navbarList.addEventListener('click', scrollOnClick);
 
 
 
-//Active status for article sections
+//Function for active status for article sections
 function myActiveClass() {
     let currentActiveClass = document.querySelector(".your-active-class");
     let newActiveClass = nodeList[temp];
     if (newActiveClass != currentActiveClass) {
         currentActiveClass.classList.remove("your-active-class");
         newActiveClass.parentNode.classList.add("your-active-class");
-        //after digging through the Web API database, I finally found that the .parentNode property
-        //was the most ideal way to append the class onto each section
+        //.parentNode because nodeList is a list of the landing containers
     }
 }
 
-
 //Active status for toggling button and section cards
-const button = document.getElementsByClassName('button')[0];
+const button = document.querySelector(".button");
 
         //any time the button or a list item is clicked, the list disappears/appears in mobile mode
 function toggleButton() {
-    navbarList.classList.toggle('active');
+    navbarList.classList.toggle("active");
 }
 
-button.addEventListener('click', toggleButton);
-navbarList.addEventListener('click', toggleButton);
-console.log(nodeList[temp]);
+button.addEventListener("click", toggleButton);
+navbarList.addEventListener("click", toggleButton);
+
+
+
+//Active status when mouse hovers over specific landing container
+//Watched tutorial for .getBoundingClientRect() here: https://www.youtube.com/watch?v=MKpZadkuT-0
+
+function inViewport (section) {
+    const bounding = section.getBoundingClientRect();
+    return (bounding.top >= 0);
+}
+
+function update() {
+    for (let i = 1; i <= nodeList.length; i++) {
+        let section = nodeList[i].parentNode;
+        if (inViewport(section)) {
+            if (!section.classList.contains("your-active-class")) {
+                section.classList.add("your-active-class");
+            }
+        } else {
+            section.classList.remove("your-active-class");
+        }
+    }
+}
+document.addEventListener("scroll", update);
