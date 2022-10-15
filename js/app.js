@@ -65,9 +65,8 @@ navbarList.addEventListener("click", toggleButton);
 
 function inViewport (section) {
     const bounding = section.getBoundingClientRect();
-    return (bounding.top >= 0);
+    return (bounding.top >= 0 && bounding.bottom <= document.documentElement.clientHeight); //A section is in the viewport when the DOMRect top is =< 0, and when the bottom is less than or equal to a user's viewport height
 }
-
 function update() {
     for (let i = 1; i <= nodeList.length; i++) {
         let section = nodeList[i].parentNode;
